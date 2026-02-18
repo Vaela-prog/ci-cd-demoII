@@ -1,0 +1,26 @@
+name: Estándar Java 21
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Forzar Java 21 Zulu
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'zulu'
+          check-latest: true
+
+      - name: Verificar versión de Java
+        run: java -version
+
+      - name: Compilar proyecto
+        run: mvn -B package
