@@ -1,20 +1,18 @@
 package com.example.demo.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.example.demo.entity.Cliente;
 
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
+
 
 @DataJpaTest
 @ActiveProfiles("test") //ojo: para usar H2

@@ -21,7 +21,7 @@ public class ReviewRestController {
     }
 
     // ============================================================
-    // GET /api/reviews → devuelve todas las reviews
+    // GET /api/reviews  devuelve todas las reviews
     // ============================================================
     @GetMapping
     public List<Review> listar() {
@@ -29,7 +29,7 @@ public class ReviewRestController {
     }
 
     // ============================================================
-    // GET /api/reviews/{id} → devuelve una review por ID
+    // GET /api/reviews/{id}  devuelve una review por ID
     // ============================================================
     @GetMapping("/{id}")
     public ResponseEntity<Review> buscarPorId(@PathVariable Long id) {
@@ -46,7 +46,7 @@ public class ReviewRestController {
     }
 
     // ============================================================
-    // POST /api/reviews → crea una nueva review
+    // POST /api/reviews  crea una nueva review
     // ============================================================
     @PostMapping
     public ResponseEntity<Review> crear(@RequestBody Review review) {
@@ -59,7 +59,7 @@ public class ReviewRestController {
     }
 
     // ============================================================
-    // PUT /api/reviews/{id} → actualiza una review existente
+    // PUT /api/reviews/{id}  actualiza una review existente
     // ============================================================
     @PutMapping("/{id}")
     public ResponseEntity<Review> actualizar(@PathVariable Long id, @RequestBody Review reviewActualizada) {
@@ -85,7 +85,7 @@ public class ReviewRestController {
     }
 
     // ============================================================
-    // DELETE /api/reviews/{id} → elimina una review por ID
+    // DELETE /api/reviews/{id}  elimina una review por ID
     // ============================================================
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
