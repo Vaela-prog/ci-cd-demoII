@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container mt-4">
+    <h2 class="fw-bold mb-4">Formulario Cliente</h2>
+
+    <form th:action="@{/clientes/guardar}" th:object="${cliente}" method="post" class="row g-3">
+
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="col-md-6">
+            <label class="form-label">Nombre</label>
+            <input type="text" th:field="*{nombre}" class="form-control" required>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Edad</label>
+            <input type="number" th:field="*{edad}" class="form-control" min="0" required>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Género</label>
+            <select th:field="*{genero}" class="form-select" required>
+                <option value="">Seleccione...</option>
+                <option value="Hombre">Hombre</option>
+                <option value="Mujer">Mujer</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">¿Tiene intolerancia?</label>
+            <select th:field="*{intolerancia}" class="form-select">
+                <option th:value="false">No</option>
+                <option th:value="true">Sí</option>
+            </select>
+        </div>
+
+        <div class="col-md-9">
+            <label class="form-label">Detalle de la intolerancia</label>
+            <input type="text" th:field="*{detalleIntolerancia}" class="form-control">
+        </div>
+
+        <div class="col-12 mt-3">
+            <button type="submit" class="btn btn-success">Guardar</button>
+
+            <a th:href="@{/clientes}" class="btn btn-secondary ms-2">
+                Cancelar
+            </a>
+        </div>
+
+    </form>
+</div>
+
+<div th:replace="fragments/footer :: footer "></div>
+
+
+</body>
+</html>

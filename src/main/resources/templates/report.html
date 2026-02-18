@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+
+<!-- Navbar común -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container mt-4" style="margin-bottom: 120px;">
+	
+    <h2 class="fw-bold mb-4">Informe General</h2>
+
+    <!-- Gráfico 1: Distribución de clientes por género -->
+    <h4>Clientes por género</h4>
+    <!-- tamaño del gráfico para que no ocupe todo lo que es por defecto -->
+    <canvas id="chartGenero" style="max-width: 300px; max-height: 300px;"></canvas>
+    <hr>
+
+    <!-- Gráfico 2: Número de reviews según la valoración -->
+    <h4>Reviews por valoración</h4>
+    <canvas id="chartEstrellas" style="max-width: 500px; max-height: 300px;"></canvas>
+    <hr>
+
+    <!-- Gráfico 3: Clientes agrupados por franjas de edad -->
+    <h4>Clientes por franjas de edad</h4>
+    <canvas id="chartEdades" style="max-width: 500px; max-height: 300px;"></canvas>
+    <hr>
+
+    <!-- Gráfico 4: Clientes con o sin intolerancia -->
+    <h4>Clientes con intolerancia</h4>
+    <canvas id="chartIntolerancia" style="max-width: 300px; max-height: 300px;"></canvas>
+
+</div>
+
+<!-- Footer común -->
+<div th:replace="fragments/footer :: footer"></div>
+
+<!-- Script donde Thymeleaf inserta los datos enviados desde el controlador -->
+<script th:inline="javascript">
+
+    // Variables que reciben los datos generados en el controlador
+    const generos = /*[[${generos}]]*/ [];
+    const estrellas = /*[[${estrellas}]]*/ [];
+    const edades = /*[[${edades}]]*/ [];
+    const intolerancias = /*[[${intolerancias}]]*/ [];
+
+    // Gráfico de tipo donut para mostrar cuántos clientes hay por género
+    new Chart(document.getElementById('chartGenero'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Hombre', 'Mujer', 'Otro'], // Categorías
+            datasets: [{
+                data: generos, // Datos reales
+                backgroundColor: ['#4e79a7', '#f28e2b', '#e15759'] // Colores del gráfico
+            }]
+        }
+    });
+
+    // Gráfico de barras muestra cuántas reviews hay por cada valoración
+    new Chart(document.getElementById('chartEstrellas'), {
+        type: 'bar',
+        data: {
+            labels: ['1', '2', '3', '4', '5'], // Valoraciones posibles
+            datasets: [{
+                label: 'Número de reviews',
+                data: estrellas,
+                backgroundColor: '#59a14f'
+            }]
+        },
+        options: { 
+            scales: { 
+                y: { beginAtZero: true } // El eje Y empieza en 0 para que sea bien
+            } 
+        }
+    });
+
+    // Gráfico de barras: cuantos clientes hay en cada franja de edad
+    new Chart(document.getElementById('chartEdades'), {
+        type: 'bar',
+        data: {
+            labels: ['0-15', '16-24', '25-35', '36-50', '51-65', '66+'], // Rangos de edad
+            datasets: [{
+                label: 'Clientes',
+                data: edades,
+                backgroundColor: '#edc948'
+            }]
+        },
+        options: { 
+            scales: { 
+                y: { beginAtZero: true } 
+            } 
+        }
+    });
+
+    // Gráfico de tipo pastel: cuántos clientes tienen intolerancia y cuántos no
+    new Chart(document.getElementById('chartIntolerancia'), {
+        type: 'pie',
+        data: {
+            labels: ['Con intolerancia', 'Sin intolerancia'],
+            datasets: [{
+                data: intolerancias,
+                backgroundColor: ['#b07aa1', '#76b7b2']
+            }]
+        }
+    });
+
+</script>
+
+</body>
+</html>
