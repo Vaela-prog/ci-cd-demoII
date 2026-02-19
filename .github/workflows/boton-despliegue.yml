@@ -1,4 +1,4 @@
-name: Despliegue Manual
+name: Boton Despliegue
 
 on:
   workflow_dispatch:
