@@ -12,10 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Descargar código
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Despliegue simulado
-        run: |
-          echo "El CI ha terminado correctamente."
-          echo "Iniciando despliegue..."
+      - name: Simular despliegue
+        run: echo "Despliegue ejecutado porque el CI ha sido correcto"
