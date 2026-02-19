@@ -15,5 +15,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Inyectar contraseña de BD
+        run: echo "Conectando a la base de datos con contraseña segura"
+        env:
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+
       - name: Simular despliegue
-        run: echo "Despliegue ejecutado porque el CI ha sido correcto"
+        run: |
+          echo "Despliegue ejecutado porque el CI ha sido correcto"
+          echo "La contraseña está en la variable de entorno (pero no la mostramos)"
