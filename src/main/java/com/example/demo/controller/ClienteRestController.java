@@ -20,17 +20,16 @@ public class ClienteRestController {
         this.clienteService = clienteService;
     }
 
-    // ============================================================
     // GET /api/clientes → devuelve todos los clientes
-    // ============================================================
+   
     @GetMapping
     public List<Cliente> listar() {
         return clienteService.listarTodos();
     }
 
-    // ============================================================
+  
     // GET /api/clientes/{id} → devuelve un cliente por su ID
-    // ============================================================
+   
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> buscarPorId(@PathVariable Long id) {
 
@@ -45,9 +44,9 @@ public class ClienteRestController {
         return ResponseEntity.ok(cliente);
     }
 
-    // ============================================================
+ 
     // POST /api/clientes → crea un nuevo cliente
-    // ============================================================
+   
     @PostMapping
     public ResponseEntity<Void> crear(@RequestBody Cliente cliente) {
 
@@ -58,13 +57,13 @@ public class ClienteRestController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    // ============================================================
+   
     // PUT /api/clientes/{id} → actualiza un cliente existente
-    // ============================================================
+    
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> actualizar(@PathVariable Long id, @RequestBody Cliente clienteActualizado) {
 
-        // 1. Buscamos si el cliente existe en la BD
+        // Buscamos si el cliente existe en la BD
         Cliente existente = clienteService.buscarPorId(id);
 
         if (existente == null) {
@@ -72,7 +71,7 @@ public class ClienteRestController {
             return ResponseEntity.notFound().build();
         }
 
-        // 2. Actualizamos los campos del cliente existente
+        // Actualizamos los campos del cliente existente
         //    con los valores recibidos en el JSON del body
         existente.setNombre(clienteActualizado.getNombre());
         existente.setEdad(clienteActualizado.getEdad());
@@ -87,15 +86,15 @@ public class ClienteRestController {
         return ResponseEntity.ok(guardado);
     }
 
-    // ============================================================
-    // DELETE /api/clientes/{id} → elimina un cliente por ID
-    // ============================================================
+   
+    // DELETE /api/clientes/{id} elimina un cliente por ID
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
 
         clienteService.eliminar(id);
 
-        // 204 No Content → eliminado correctamente
+        // 204 No Content eliminado correctamente
         return ResponseEntity.noContent().build();
     }
 }
