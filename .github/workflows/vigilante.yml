@@ -19,3 +19,12 @@ jobs:
 
       - name: Compilar con Maven
         run: mvn -B package
+
+      - name: Notificador de estado
+        run: |
+          echo "----------------------------------------"
+          echo "DESPLIEGUE COMPLETADO CORRECTAMENTE"
+          echo "Autor del despliegue: ${{ github.actor }}"
+          echo "Fecha: $(date)"
+          echo "Mensaje: El despliegue se realizó con éxito."
+          echo "----------------------------------------"
