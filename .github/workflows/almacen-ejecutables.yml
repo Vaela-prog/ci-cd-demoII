@@ -18,12 +18,11 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Generar .jar sin tests
+      - name: Generar .war sin tests
         run: mvn -B clean package -DskipTests
 
-      - name: Subir artifact (.jar)
+      - name: Subir artifact (.war)
         uses: actions/upload-artifact@v4
         with:
-          name: ejecutable-jar
-		  path: target/*.war
-
+          name: ejecutable-war
+          path: target/*.war
